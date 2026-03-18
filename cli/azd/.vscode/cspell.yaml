@@ -306,6 +306,14 @@ overrides:
   - filename: pkg/azdext/scope_detector.go
     words:
       - fakeazure
+  - filename: pkg/azapi/policy_service.go
+    words:
+      - armpolicy
+      - disablelocalauth
+      - allowsharedkeyaccess
+      - localauthenabled
+      - policydefinitions
+      - policysetdefinitions
   - filename: extensions/azure.ai.models/internal/cmd/custom_create.go
     words:
       - Qwen
