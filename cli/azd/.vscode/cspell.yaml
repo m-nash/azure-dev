@@ -321,6 +321,11 @@ overrides:
   - filename: extensions/azure.ai.models/internal/cmd/custom_create.go
     words:
       - Qwen
+  - filename: test/eval/README.md
+    words:
+      - Waza
+      - waza
+      - urlopen
 ignorePaths:
   - "**/*_test.go"
   - "**/mock*.go"
