@@ -256,6 +256,12 @@ overrides:
   - filename: pkg/project/service_target_dotnet_containerapp.go
     words:
       - IMAGENAME
+  - filename: internal/vsrpc/server.go
+    words:
+      - CSWSH
+  - filename: pkg/extensions/manager.go
+    words:
+      - myext
   - filename: extensions/microsoft.azd.extensions/internal/resources/languages/**/.gitignore
     words:
       - rsuser
@@ -314,6 +320,9 @@ overrides:
       - policydefinitions
       - policysetdefinitions
       - managementgroups
+  - filename: "{pkg/azapi/permissions.go,pkg/infra/provisioning/bicep/bicep_provider.go}"
+    words:
+      - ABAC
   - filename: extensions/azure.ai.models/internal/cmd/custom_create.go
     words:
       - Qwen
