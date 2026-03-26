@@ -287,14 +287,14 @@ func populateContainerSettings(ctx context.Context, azdClient *azdext.AzdClient,
 		}
 	}
 
-	// Check and populate Scale
-	if containerSettings.Scale == nil {
-		result.Scale = &project.ScaleSettings{}
-	} else {
+	// Preserve existing Scale settings from azure.yaml, but don't create new defaults for VNext
+	if containerSettings.Scale != nil {
 		result.Scale = &project.ScaleSettings{
 			MinReplicas: containerSettings.Scale.MinReplicas,
 			MaxReplicas: containerSettings.Scale.MaxReplicas,
 		}
+	} else if !isVNextEnabled(ctx) {
+		result.Scale = &project.ScaleSettings{}
 	}
 
 	// Set default values if zero or empty
@@ -306,12 +306,14 @@ func populateContainerSettings(ctx context.Context, azdClient *azdext.AzdClient,
 		result.Resources.Cpu = project.DefaultCpu
 	}
 
-	if result.Scale.MinReplicas == 0 {
-		result.Scale.MinReplicas = project.DefaultMinReplicas
-	}
+	if result.Scale != nil {
+		if result.Scale.MinReplicas == 0 {
+			result.Scale.MinReplicas = project.DefaultMinReplicas
+		}
 
-	if result.Scale.MaxReplicas == 0 {
-		result.Scale.MaxReplicas = project.DefaultMaxReplicas
+		if result.Scale.MaxReplicas == 0 {
+			result.Scale.MaxReplicas = project.DefaultMaxReplicas
+		}
 	}
 
 	// Update the container settings in the existing config
